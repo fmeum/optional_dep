@@ -1,0 +1,6 @@
+module(
+    name = "dep",
+    version = "1.0",
+)
+
+bazel_dep(name = "optional_dep", version = "0.1.0")

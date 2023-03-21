@@ -1,0 +1,6 @@
+test_suite(
+    name = "external_tests",
+    tests = [
+        "@dep//:greetings_test",
+    ],
+)

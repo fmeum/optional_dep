@@ -1,0 +1,20 @@
+bazel_dep(name = "dep", version = "")
+local_path_override(
+    module_name = "dep",
+    path = "dep",
+)
+
+bazel_dep(name = "optional_dep_1", version = "")
+local_path_override(
+    module_name = "optional_dep_1",
+    path = "optional_dep_1",
+)
+
+# No dependency on optional_dep_2
+
+# Overrides for testing
+
+local_path_override(
+    module_name = "optional_dep",
+    path = "../..",
+)

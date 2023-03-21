@@ -1,0 +1,9 @@
+module(
+    name = "optional_dep_2",
+    version = "1.0",
+)
+
+bazel_dep(name = "optional_dep", version = "0.1.0")
+
+optional_dep = use_extension("@optional_dep//:extensions.bzl", "optional_dep")
+optional_dep.register(module_file = "//:MODULE.bazel")

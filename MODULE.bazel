@@ -1,0 +1,8 @@
+module(
+    name = "optional_dep",
+    version = "0.1.0",
+    compatibility_level = 1,
+)
+
+optional_dep = use_extension("//:extensions.bzl", "optional_dep")
+use_repo(optional_dep, "present_deps")

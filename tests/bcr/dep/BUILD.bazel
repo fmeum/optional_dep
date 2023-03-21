@@ -1,0 +1,23 @@
+load("@optional_dep//:defs.bzl", "optional_dep")
+
+optional_dep.is_present("optional_dep_1") or fail("optional_dep_1 detected as not present, but it is present")
+
+optional_dep.is_present("optional_dep_2") and fail("optional_dep_2 detected as present, but it is not present")
+
+genrule(
+    name = "greetings",
+    srcs = [label for label in [
+        optional_dep.label_or_none("@optional_dep_1//pkg:greeting.txt"),
+        optional_dep.label_or_none("@optional_dep_2//pkg:greeting.txt"),
+    ] if label != None],
+    outs = ["greetings.txt"],
+    cmd = "cat $(SRCS) > $@",
+)
+
+sh_test(
+    name = "greetings_test",
+    srcs = ["greetings_test.sh"],
+    data = ["greetings.txt"],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+    visibility = ["//visibility:public"],
+)
